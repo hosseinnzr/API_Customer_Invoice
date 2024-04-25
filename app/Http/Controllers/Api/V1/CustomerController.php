@@ -13,9 +13,7 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request)
         {
         $filter = new CustomersFilter();
@@ -33,25 +31,22 @@ class CustomerController extends Controller
 
         }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCustomerRequest $request)
     {
-        return new CustomerResource(Customer::created($request->all()));
-    }
+        return new CustomerResource(Customer::create($request->all()));
+    } 
+    // example : post method : http://127.0.0.1:8000/api/v1/customers . send json :         
+    // {
+    //     "name": "Zulauf-Padberg",
+    //     "type": "I",
+    //     "email": "cole.chelsey@gmail.com",
+    //     "address": "417 Bernardo Vista\nWest Shad, VA 94312-2055",
+    //     "city": "West Nat",
+    //     "state": "Missouri",
+    //     "postal_code": "39709"
+    // }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Customer $customer, Request $request)
     {
         $includeInvoices = $request->query('includeInvoices');
@@ -63,25 +58,14 @@ class CustomerController extends Controller
         return new CustomerResource($customer);
     } // example : http://127.0.0.1:8000/api/v1/customers/5?includeInvoices=true
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Customer $customer)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Customer $customer)
     {
         //
