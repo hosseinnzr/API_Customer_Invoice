@@ -28,9 +28,9 @@ Route::get('/setup', function() {
         if(Auth::attempt($credentials)){
             $user = Auth::user();
 
-            $adminToken = $user->createToken('admin-token', ['create', 'update', 'dalete']);
-            $updateToken = $user->createToken('updateToken-token', ['create', 'update']);
-            $basicToken = $user->createToken('basic-token');
+            $adminToken = $user->createToken('admin-token', ['create', 'update', 'dalete']); // Undefined method 'createToken' not import :)
+            $updateToken = $user->createToken('updateToken-token', ['create', 'update']); // Undefined method 'createToken' not import :)
+            $basicToken = $user->createToken('basic-token'); // Undefined method 'createToken' not import :)
 
             return [
                 'admin' => $adminToken->plainTextToken,
