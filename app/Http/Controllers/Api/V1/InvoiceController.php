@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Invoice;
+use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use App\Filters\V1\InvoicesFilter;
+
 use App\Http\Controllers\Controller;
+
+use App\Http\Resources\V1\InvoiceResource;
+use App\Http\Resources\V1\InvoiceCollection;
 use App\Http\Requests\V1\StoreInvoiceRequest;
 use App\Http\Requests\V1\UpdateInvoiceRequest;
-use App\Http\Resources\V1\InvoiceCollection;
-use App\Http\Resources\V1\InvoiceResource;
-use App\Models\Invoice;
-use Illuminate\Http\Request;
+
+use App\Http\Requests\V1\BulkStoreInvoiceRequest    ;
+
 
 class InvoiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request)
     {
         $filter = new InvoicesFilter();
@@ -29,49 +33,61 @@ class InvoiceController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
+
+    public function create(){
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreInvoiceRequest $request)
-    {
+
+    public function store(){
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Invoice $invoice)
-    {
+    
+    public function bulkStore(BulkStoreInvoiceRequest $request){ // add multi invoice together
+        $bulk = collect($request->all())->map(function($arr){
+            return Arr::except($arr, ['customerId', 'billedDate', 'paidDate']);
+        });
+        // dd($bulk->toArray());
+        
+        Invoice::insert($bulk->toArray());
+    }
+    // example : post method : http://127.0.0.1:8000/api/v1/invoices/bulk . send json :         
+    // [
+    //     {
+    //         "customerId": "1",
+    //         "amount": "8888",
+    //         "status": "B",
+    //         "billedDate": "2018-12-25 13:49:09",
+    //         "paidDate": "2019-12-25 13:49:10"
+    //     },
+    //     {
+    //         "customerId": "1",
+    //         "amount": "8888",
+    //         "status": "P",
+    //         "billedDate": "2018-12-25 13:49:09",
+    //         "paidDate": "2015-12-25 13:49:22"
+    //     }
+    // ]
+
+
+    public function show(Invoice $invoice){
         return new InvoiceResource($invoice);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Invoice $invoice)
-    {
+
+    public function edit(Invoice $invoice){
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateInvoiceRequest $request, Invoice $invoice)
-    {
+
+    
+    public function update(UpdateInvoiceRequest $request, Invoice $invoice){
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+    
     public function destroy(Invoice $invoice)
     {
         //

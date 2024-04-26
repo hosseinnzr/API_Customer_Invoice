@@ -16,8 +16,7 @@ use App\Models\Customer;
 class CustomerController extends Controller
 {
 
-    public function index(Request $request)
-        {
+    public function index(Request $request){
         $filter = new CustomersFilter();
         $filterItems = $filter->transform($request);
 
@@ -26,15 +25,13 @@ class CustomerController extends Controller
 
         if($includeInvoices){
             $customers = $customers->with('invoices');
-        }
-
-
+    }
         return new CustomerCollection($customers->paginate()->appends($request->query()));
+    }
 
-        }
+        
 
-    public function store(StoreCustomerRequest $request)
-    {
+    public function store(StoreCustomerRequest $request){
         return new CustomerResource(Customer::create($request->all()));
     } 
     // example : post method : http://127.0.0.1:8000/api/v1/customers . send json :         
@@ -49,8 +46,14 @@ class CustomerController extends Controller
     // }
 
 
-    public function show(Customer $customer, Request $request)
-    {
+
+    public function bulkStore(Request $request){
+        //
+    }
+
+
+
+    public function show(Customer $customer, Request $request){
         $includeInvoices = $request->query('includeInvoices');
 
         if($includeInvoices){
@@ -62,8 +65,7 @@ class CustomerController extends Controller
 
 
     
-    public function update(UpdateCustomerRequest $request, Customer $customer)
-    {
+    public function update(UpdateCustomerRequest $request, Customer $customer){
         // PUT method for update : must send all method
         // PATCh method for update : just send method that you want to change
 
@@ -84,8 +86,8 @@ class CustomerController extends Controller
     // }
 
 
-    public function destroy(Customer $customer)
-    {
+
+    public function destroy(Customer $customer){
         //
     }
 }
