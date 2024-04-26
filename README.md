@@ -1,6 +1,6 @@
 ## Customer Invoice api
-index, store, show, update method for cutomer
-index, bulkStore(for store multi invoice to gether)
+index, store, show, update method for cutomer <br>
+index, bulkStore(for store multi invoice to gether) <br>
 
 ### Token
 for create token use "http://127.0.0.1:8000/setup", this url give you three token with dfferent access :<br>
