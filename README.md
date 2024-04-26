@@ -10,6 +10,12 @@
 9. composer require laravel/sanctum
 10. php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 
+
+admin	"7|qhVEb43T3wCnkSXRgMVDG06MAJUV5lcDTLtkKRAvda275abd"
+update	"8|cqDLhBFDmaeszzXqBCwS8vtCqawcSYZQ7PGq8lMp1b561e0a"
+basic	"9|29Fv346slX3Nys6LHPrRQgBRmdZMg1ya6skAfp9b3f346a61"
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
