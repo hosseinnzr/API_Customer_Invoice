@@ -14,12 +14,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::group(['prefix'=> 'v1'], function () {
+Route::group(['prefix'=> 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => 'auth:sanctum'], function () {
     Route::apiResource('customers', CustomerController::class);
     Route::apiResource('invoices', InvoiceController::class);
 
     Route::post('invoices/bulk', [InvoiceController::class,'bulkStore']);
-
-    // Route::post('invoices/bulk', 'InvoiceController@bulkStore'); 
 
 }); 
